@@ -23,8 +23,9 @@ def getOTP():
 			print 'Warning: more than one mail present. Preferring latest first.'
 			emails = sorted(emails, key=lambda email: email['mail_timestamp'], reverse=True)
 
-		otp, mail_id = findOTP(emails)
-		if otp:
+		result = findOTP(emails)
+		if result:
+			otp, mail_id = result
 			# definitely delete the email
 			while(not tempmail.deleteEmail(mail_id)):
 				pass
