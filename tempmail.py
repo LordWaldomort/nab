@@ -4,9 +4,8 @@ import requests
 import string
 
 DOMAINS = [
-			'@30wave.com', '@fulvie.com', '@tverya.com', '@maileme101.com',
-			'@stromox.com', '@zainmax.net', '@9me.site', '@dr69.site',
-			'@zain.site'
+			'@30wave.com', '@fulvie.com', '@tverya.com', '@stromox.com',
+			'@zainmax.net', '@9me.site', '@dr69.site', '@zain.site'
 		]
 
 USERNAME_CHARS = string.ascii_lowercase + string.digits
@@ -35,5 +34,5 @@ def getEmails(email_address):
 		return []
 
 if __name__ == '__main__':
-	x = 'test@maileme101.com'
+	x = 'cheop6vyn2@30wave.com'
 	print getEmails(x)
