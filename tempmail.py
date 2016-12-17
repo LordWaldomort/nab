@@ -9,7 +9,9 @@ DOMAINS = [
 		]
 
 USERNAME_CHARS = string.ascii_lowercase + string.digits
-GET_EMAILS_URL = 'http://api.temp-mail.org/request/mail/id/%s/format/json/'
+BASE_URL = 'http://api.temp-mail.org/request'
+GET_EMAILS_URL = BASE_URL + '/mail/id/%s/format/json/'
+DELETE_EMAIL_URL = BASE_URL + '/delete/id/%s/format/json/'
 
 def getMD5Digest(str):
 	return md5.new(str).hexdigest()
@@ -32,6 +34,16 @@ def getEmails(email_address):
 		return req.json()
 	else:
 		return []
+
+def deleteEmail(mail_id):
+	print 'trying deleting email %s' % mail_id
+
+	url = DELETE_EMAIL_URL % mail_id
+	req = requests.get(url)
+	status = req.status_code == 200 and req.json()['result'] == 'success'
+	print 'deleted %s: %s' % (mail_id, status)
+
+	return status
 
 if __name__ == '__main__':
 	x = 'cheop6vyn2@30wave.com'
