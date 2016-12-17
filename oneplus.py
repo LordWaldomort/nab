@@ -1,5 +1,4 @@
 import re
-import requests
 
 import tempmail
 
@@ -13,22 +12,17 @@ def findActivationLink(emails):
 		if match:
 			return match.group(0)
 
-def activate(email_address):
+def getActivationLink(email_address):
 	for attempt in xrange(NUMBER_OF_RETRIES):
-		print 'Activation attempt %d for %s' % (attempt, email_address)
+		print 'Attempt %d for %s' % (attempt, email_address)
 		emails = tempmail.getEmails(email_address)
 		activation_link = findActivationLink(emails)
 
 		if activation_link:
-			req = requests.get(activation_link)
-			if req.status_code == 200:
-				print 'Activated %s' % email_address
-				return True
-			else:
-				print 'Failed to activate %s via link %s' % (email_address, activation_link)
-				return False
+			return activation_link
 
-	return False
+	print 'Failed to get activation link for %s after %d retries' % (email_address, NUMBER_OF_RETRIES)
+	return None
 
 if __name__ == '__main__':
-	print activate('weryujn7u@30wave.com')
+	print getActivationLink('weryujn7u@30wave.com')
