@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        nba_signup
+// @name        nab_signup
 // @namespace   https://account.oneplus.net/sign-up
 // @include     https://account.oneplus.net/sign-up
 // @version     1

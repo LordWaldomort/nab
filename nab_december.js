@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         nba_december
+// @name         nab_december
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @match        https://oneplusstore.in/december?_act_referrer=16377596
+// @include      https://oneplusstore.in/december?*
 // @grant        none
 // ==/UserScript==
 
@@ -29,13 +29,7 @@ if($("#diwali-login-btn").children("i").length===0){
             $.ajax({url:"https://oneplusstore.in/xman/jubilee/ticket/update?event=mobile"}).done(function(data){
                 console.log(data);
                 $("#logOutBtn")[0].click();
-                
             });
         });
     });
 }
-
-
-
-
-

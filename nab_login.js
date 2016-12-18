@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        nba_login
+// @name        nab_login
 // @namespace   https://account.oneplus.net/login
 // @include     https://account.oneplus.net/login?*
 // @version     1
