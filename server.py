@@ -2,6 +2,10 @@ import os
 import threading
 
 import oneplus
+from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+import urlparse
+
+server_port = 6666;
 
 ACTIVATION_LINK_FILENAME = 'activation_links.txt'
 
@@ -24,9 +28,29 @@ def getActivationLink(email_address):
 
 	writeToFile(activation_link_file, '%s\t%s\n' % (email_address, activation_link))
 
-def startServer():
-	# TODO(ajay): write server stuff
-	pass
+
+class signUpServer(BaseHTTPRequestHandler):
+	def do_GET(self):
+		self.send_response(200)
+		self.send_header('Content-type','text/html')
+		self.end_headers()
+		self.wfile.write("<html><script>window.close();</script></html>");
+		
+		method = self.path.split("?")[0]
+		if method == "/gen":		
+			email = urlparse.parse_qs(urlparse.urlparse(self.path).query).get("email", None)[0];
+			print "Starting thread for ", email
+			threading.Thread(target=getActivationLink, args=(email,)).start();
+		return
+
+def startSignupServer():
+	try:
+		server = HTTPServer(('', server_port), signUpServer)
+		server.serve_forever()
+	except KeyboardInterrupt:
+		print '^C received, shutting down the web server'
+		server.socket.close()
 
 if __name__ == '__main__':
-	getActivationLink('weryujn7u@30wave.com')
+	#getActivationLink('weryujn7u@30wave.com')
+	startSignupServer()
