@@ -12,9 +12,11 @@ DOMAINS = [
 
 USERNAME_CHARS = string.ascii_lowercase + string.digits
 if os.path.exists("curl_command.txt"):
-	BASE_URL = 'http://api.temp-mail.org/request'
-else:
 	BASE_URL = 'https://api.temp-mail.org/request'
+else:
+	BASE_URL = 'http://api.temp-mail.org/request'
+
+
 	
 GET_EMAILS_URL = BASE_URL + '/mail/id/%s/format/json/'
 DELETE_EMAIL_URL = BASE_URL + '/delete/id/%s/format/json/'
@@ -33,7 +35,9 @@ def getRandomEmailAddress():
 
 def getEmails(email_address):
 	md5_digest = getMD5Digest(email_address)
+	url = GET_EMAILS_URL % md5_digest
 	if os.path.exists("curl_command.txt"):
+	
 		f=open("curl_command.txt")
 		command = f.read().strip()+" "+url
 		process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -42,7 +46,6 @@ def getEmails(email_address):
 			return json.loads(response_text)
 		except:
 			return []	
-	url = GET_EMAILS_URL % md5_digest
 	req = requests.get(url)
 
 	if req.status_code == 200:
