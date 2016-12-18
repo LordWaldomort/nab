@@ -6,7 +6,7 @@ import tempmail
 import time
 ACTIVATION_LINK_REGEX = 'https://account.oneplus.net/confirm/[0-9a-f]{32}'
 
-NUMBER_OF_RETRIES = 1000
+NUMBER_OF_RETRIES = 20
 
 def findActivationLink(emails):
 	for email in emails:

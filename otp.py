@@ -6,7 +6,7 @@ EMAIL_ADDRESS = 'ajayoneplusverify@30wave.com'
 
 OTP_REGEX = 'Your verification code is ([0-9]{6}).'
 
-NUMBER_OF_RETRIES = 100
+NUMBER_OF_RETRIES = 20
 
 def findOTP(emails):
 	for email in emails:
