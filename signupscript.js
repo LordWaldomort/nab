@@ -30,9 +30,8 @@ var complete_signup_form=function(){
    $("#inputEmail").val(mailid);
    $("#inputCurrentPassword").val(password);
    $("#inputPasswordConfirmation").val(password);
-   window.open("http://localhost:6666/gen?email="+mailid, "_blank").onload=function(){self.close();}
+   window.open("http://localhost:8080/gen?email="+mailid, "_blank").onload=function(){self.close();}
   }
 }
 
 complete_signup_form();
-

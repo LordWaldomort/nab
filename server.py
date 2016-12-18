@@ -5,7 +5,7 @@ import oneplus
 from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
 import urlparse
 
-server_port = 6666;
+server_port = 8080;
 
 ACTIVATION_LINK_FILENAME = 'activation_links.txt'
 
@@ -35,9 +35,9 @@ class signUpServer(BaseHTTPRequestHandler):
 		self.send_header('Content-type','text/html')
 		self.end_headers()
 		self.wfile.write("<html><script>window.close();</script></html>");
-		
+
 		method = self.path.split("?")[0]
-		if method == "/gen":		
+		if method == "/gen":
 			email = urlparse.parse_qs(urlparse.urlparse(self.path).query).get("email", None)[0];
 			print "Starting thread for ", email
 			threading.Thread(target=getActivationLink, args=(email,)).start();
