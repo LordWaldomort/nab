@@ -26,6 +26,7 @@ def getOTP():
 		result = findOTP(emails)
 		if result:
 			otp, mail_id = result
+			print 'Got OTP'
 			# definitely delete the email
 			while(not tempmail.deleteEmail(mail_id)):
 				pass
