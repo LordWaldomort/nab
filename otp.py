@@ -2,7 +2,7 @@ import re
 
 import tempmail
 
-EMAIL_ADDRESS = 'weryujn7u@30wave.com'
+EMAIL_ADDRESS = 'ajayoneplusverify@30wave.com'
 
 OTP_REGEX = 'Your verification code is ([0-9]{6}).'
 
