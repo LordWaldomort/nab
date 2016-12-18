@@ -22,6 +22,7 @@ def getActivationLink(email_address):
 		activation_link = findActivationLink(emails)
 
 		if activation_link:
+			print 'Got link for %s' % (email_address)
 			return activation_link
 
 	print 'Failed to get activation link for %s after %d retries' % (email_address, NUMBER_OF_RETRIES)
