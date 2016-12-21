@@ -37,7 +37,7 @@ if($("#diwali-login-btn").children("i").length===0){
             console.log(data);
             $.ajax({url:"https://oneplusstore.in/xman/jubilee/ticket/update?event=mobile"}).done(function(data){
                 console.log(data);
-                // $("#logOutBtn")[0].click();
+                $("#logOutBtn")[0].click();
             });
         });
     });
