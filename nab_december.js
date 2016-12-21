@@ -20,15 +20,24 @@ gen_random_phone = function(){
 if($("#diwali-login-btn").children("i").length===0){
     $("#diwali-login-btn").children("a")[0].click();
 }else{
-    $.ajax({url:"https://account.oneplus.net/json/user/send-sms",data:{mobile:my_mobile_number},type:"post",dataType:"json",xhrFields:{withCredentials:!0},timeout:3e4,});
 
-    $.ajax({url:backend_server+"/request_otp"}).done(function(data){
+	var target_number= gen_random_phone();
+
+	$.ajax({url:"https://oneplusstore.in/xman/jubilee/ticket/update?event=mobile"}).done(function(data){
+		$.ajax({url:"https://account.oneplus.net/json/user/check-mobile",type:"post", data: {mobile: target_number},dataType: "json",xhrFields: {withCredentials: !0},timeout: 3e4,}).done(function() {
+			$.ajax({url:"https://account.oneplus.net/json/user/send-sms",data:{mobile:target_number},type:"post",dataType:"json",xhrFields:{withCredentials:!0},timeout:3e4,}).done(function() {
+				$.ajax({url:"https://account.oneplus.net/json/user/send-sms",data:{mobile:my_mobile_number},type:"post",dataType:"json",xhrFields:{withCredentials:!0},timeout:3e4,});
+			});
+		});
+	});
+
+	$.ajax({url:backend_server+"/request_otp?num=" + target_number}).done(function(data){
         console.log(data);
-        $.ajax({url:"https://account.oneplus.net/json/user/bind-mobile",type:"post",data:{code:data,countryCode:"in",mobile:gen_random_phone()},dataType:"json",xhrFields:{withCredentials:!0},timeout:3e4,}).done(function(data){
+        $.ajax({url:"https://account.oneplus.net/json/user/bind-mobile",type:"post",data:{code:data,countryCode:"in",mobile:target_number},dataType:"json",xhrFields:{withCredentials:!0},timeout:3e4,}).done(function(data){
             console.log(data);
             $.ajax({url:"https://oneplusstore.in/xman/jubilee/ticket/update?event=mobile"}).done(function(data){
                 console.log(data);
-                $("#logOutBtn")[0].click();
+                // $("#logOutBtn")[0].click();
             });
         });
     });

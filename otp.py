@@ -1,10 +1,11 @@
+import json
 import re
 
 import tempmail
 
 EMAIL_ADDRESS = 'agamoneplusverify@30wave.com'
 
-OTP_REGEX = 'Your verification code is ([0-9]{6}).'
+OTP_REGEX = 'Your verification code is ([^\.]*)\.'
 
 NUMBER_OF_RETRIES = 100
 
@@ -12,7 +13,13 @@ def findOTP(emails):
 	for email in emails:
 		match = re.search(OTP_REGEX, email['mail_text'])
 		if match:
-			return match.group(1)
+			m = match.group(1)
+
+			if len(m) == 6:
+				return m
+			else:
+				j = json.loads(m)
+				return str(j['code'])
 
 def getOTP():
 	for attempt in xrange(NUMBER_OF_RETRIES):
